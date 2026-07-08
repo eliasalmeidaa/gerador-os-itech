@@ -1,4 +1,4 @@
-# OS PLACE — Ordens de Serviço para Assistência Técnica 📱
+# OS Place 📱
 
 Sistema de gerenciamento de ordens de serviço para assistência técnica de celular, com backend em **Python (FastAPI)** e frontend em **JavaScript puro**.
 
@@ -6,37 +6,40 @@ Sistema de gerenciamento de ordens de serviço para assistência técnica de cel
 
 - **Python** + **FastAPI** — API REST com CRUD completo
 - **JavaScript (Vanilla)** — frontend consumindo a API via `fetch`
+- **Plotly.js** — gráfico de pizza (OS concluídas vs pendentes)
 - **HTML5** + **CSS3** — interface simples e funcional
 
 ## ⚙️ Funcionalidades
 
-- ✅ Criar nova ordem de serviço
+- ✅ Criar nova ordem de serviço (cliente, aparelho, problema)
 - ✅ Listar todas as ordens de serviço
-- ✅ Atualizar status da OS (Aguardando, Em andamento, Concluído)
+- ✅ Marcar/desmarcar OS como concluída
 - ✅ Remover ordem de serviço
-- ✅ Renderização dinâmica dos cards via JS
-- ✅ Contador de OS abertas em tempo real
+- 🚧 Renderização dinâmica dos cards via JS (em desenvolvimento)
+- 🚧 Gráfico de pizza com Plotly (OS concluídas vs pendentes)
+- 🚧 Contador de OS abertas em tempo real
 
 ## 📋 Campos de uma Ordem de Serviço
 
-- `id` — número único gerado automaticamente
+- `id_os` — número único gerado automaticamente
 - `cliente` — nome do cliente
 - `aparelho` — modelo do celular (ex: iPhone 13, Samsung A54)
 - `problema` — descrição do defeito relatado
-- `status` — `aguardando` | `em_andamento` | `concluido`
-- `data` — data de entrada gerada automaticamente
+- `concluido` — `false` (pendente) ou `true` (concluída)
 
 ## 📁 Estrutura
 
 ```
-os-manager/
+os-place/
 ├── backend/
-│   ├── app.py      # FastAPI: rotas GET, POST, PUT, DELETE
-│   └── dados.py    # lista de ordens em memória
+│   ├── main.py     # FastAPI: rotas GET, POST, PUT, DELETE
+│   └── dados.py    # lista de OS em memória
 └── frontend/
     ├── index.html
     ├── css/style.css
-    └── js/script.js
+    └── js/
+        ├── routes.js   # funções fetch (GET, POST, PUT, DELETE)
+        └── script.js   # lógica principal (renderizar, eventos, gráfico)
 ```
 
 ## 🚀 Como rodar
@@ -44,7 +47,7 @@ os-manager/
 **Backend:**
 ```bash
 cd backend
-python3 -m uvicorn app:app --reload
+python3 -m uvicorn main:app --reload
 ```
 
 **Frontend:**
@@ -59,19 +62,25 @@ http://localhost:8000/docs
 
 | Método | Rota | Descrição |
 |---|---|---|
-| GET | `/ordens` | Lista todas as ordens de serviço |
-| POST | `/ordens` | Cria uma nova OS |
-| PUT | `/ordens/{id}` | Atualiza o status da OS |
-| DELETE | `/ordens/{id}` | Remove uma OS |
+| GET | `/ordem` | Lista todas as OS |
+| POST | `/ordem` | Cria nova OS |
+| PUT | `/ordem/{id}` | Marca/desmarca como concluída |
+| DELETE | `/ordem/{id}` | Remove uma OS |
 
 ## 💡 O que pratiquei com este projeto
 
-- API REST com FastAPI e Pydantic
+- API REST com FastAPI e Pydantic (validação automática de dados)
 - CORS — comunicação entre origens diferentes
 - `fetch` com GET, POST, PUT e DELETE no frontend
+- Separação de responsabilidades no frontend (`routes.js` e `script.js`)
 - Renderização dinâmica de elementos via JS
+- Gráfico interativo com Plotly.js
 - Comunicação real entre frontend JS e backend Python
+
+## 🚧 Status
+
+Em desenvolvimento — backend completo. Falta: frontend JS (fetch, renderização dos cards e gráfico Plotly).
 
 ---
 
-Desenvolvido por [Elias Martins de Almeida](https://github.com/eliasalmeidaa) como prática de integração entre frontend JS e backend Python.
+Desenvolvido por [Elias Martins de Almeida](https://github.com/eliasalmeidaa) como prática de desenvolvimento fullstack com Python e JavaScript.
