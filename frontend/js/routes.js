@@ -11,7 +11,7 @@ function buscarOS(){
         })
     }
 
-function criarOS(){
+function criarOS(cliente, aparelho, problema){
     fetch(URL,{
         method: 'POST',
         headers:{'Content-Type': 'application/json'},
@@ -23,4 +23,30 @@ function criarOS(){
     .then (function(dados){
         buscarOS();
     })  
+}
+
+function concluirOS(id){
+    fetch(URL + '/' +id ,{
+        method: 'PUT'
+    })
+
+    .then (function(resposta){
+        return resposta.json;
+    })
+
+    .then (function(dados){
+        buscarOS();
+    })
+}
+
+function removerOS(id){
+    fetch(URL + '/' + id, {
+        method: 'DELETE'
+    })
+    .then(function(resposta){
+        return resposta.json();
+    })
+    .then(function(dados){
+        buscarOS();
+    })
 }
