@@ -1,4 +1,4 @@
-const URL = 'http://127.0.0.1:8000'
+const URL = 'http://127.0.0.1:8000/ordem'
 
 function buscarOS(){
     fetch(URL)
@@ -11,11 +11,11 @@ function buscarOS(){
         })
     }
 
-function criarOS(cliente, aparelho, problema){
+function criarOS(cCliente,cDefeito, cAparelho){
     fetch(URL,{
         method: 'POST',
         headers:{'Content-Type': 'application/json'},
-        body: JSON.stringify({cliente: campCliente, aparelho: campAparelho, problema: campDefeito })
+        body: JSON.stringify({cliente: cCliente, aparelho: cAparelho, problema: cDefeito })
     })
     .then(function(resposta){
         return resposta.json();
@@ -31,7 +31,7 @@ function concluirOS(id){
     })
 
     .then (function(resposta){
-        return resposta.json;
+        return resposta.json();
     })
 
     .then (function(dados){
